@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Money</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #ccc;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 20px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .bkash-btn {
+      background-color: #d9004c;
+    }
+    .nagad-btn {
+      background-color: #f7941d;
+    }
+    .qr-section {
+      margin-top: 30px;
+      display: none;
+    }
+    .number {
+      font-size: 20px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .copy-btn {
+      background-color: #444;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .note {
+      margin-top: 20px;
+      color: #ccc;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🥀 এক টাকার ভালোবাসা</h1>
+
+  <button class="btn bkash-btn" onclick="toggleQR('bkash')">বিকাশ</button>
+  <button class="btn nagad-btn" onclick="toggleQR('nagad')">নগদ</button>
+
+  <div id="message" class="note">
+    ❤️ গার্লফ্রেন্ডের সঙ্গে দেখা করতে যাব টাকা চাই<br>
+    আপনি চাইলে এক টাকাও সেন্ড মানি করতে পারেন বিশ্বাস না হলে দিয়ে দেখেন 👍
+  </div>
+
+  <!-- bKash QR Section -->
+  <div id="bkash-section" class="qr-section">
+    <h2>📲 বিকাশ QR</h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=bkash://payment?phone=01794741523&size=200x200" alt="bKash QR">
+    <div class="number">01794741523</div>
+    <button class="copy-btn" onclick="copyNumber('01794741523')">📋 Copy bKash Number</button>
+  </div>
+
+  <!-- Nagad QR Section -->
+  <div id="nagad-section" class="qr-section">
+    <h2>📲 নগদ QR</h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=nagad://sendmoney?msisdn=01794741523&size=200x200" alt="Nagad QR">
+    <div class="number">01794741523</div>
+    <button class="copy-btn" onclick="copyNumber('01794741523')">📋 Copy Nagad Number</button>
+  </div>
+
+  <script>
+    function toggleQR(type) {
+      var bkash = document.getElementById('bkash-section');
+      var nagad = document.getElementById('nagad-section');
+      var message = document.getElementById('message');
+
+      if (type === 'bkash') {
+        if (bkash.style.display === 'block') {
+          bkash.style.display = 'none';
+          message.style.display = 'block';
+        } else {
+          bkash.style.display = 'block';
+          nagad.style.display = 'none';
+          message.style.display = 'none';
+        }
+      } else {
+        if (nagad.style.display === 'block') {
+          nagad.style.display = 'none';
+          message.style.display = 'block';
+        } else {
+          nagad.style.display = 'block';
+          bkash.style.display = 'none';
+          message.style.display = 'none';
+        }
+      }
+    }
+
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number);
+      alert("📋 নাম্বার কপি হয়েছে: " + number);
+    }
+  </script>
+
+</body>
+</html>
